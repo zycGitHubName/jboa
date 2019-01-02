@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false"  %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -77,7 +77,7 @@
 		//获取当前的时间作为参数，无具体意义 
 		var timenow = new Date().getTime();
 		//每次请求需要一个不同的参数，否则可能会返回同样的验证码
-		//这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。 
+		//这和浏览器的缓存机制有关系，也可以把页面设置为不缓存，这样就不用这个参数了。
 		obj.src = "random.action?d=" + timenow;
 	}
 	function check() {
@@ -109,7 +109,7 @@
 				onclick="changeValidateCode(this)" title="点击图片刷新验证码" />
 			<input type="submit" class="login-sub" value="" />
 			<s:actionerror cssStyle="margin-top: 10px;"/>
-			<input type="hidden" id="msg" value="${requestScope.msg }" />
+			<input type="hidden" id="msg" value="${requestScope.msg}" />
 		</form>
 	</div>
 	<div class="login-copyright"></div>

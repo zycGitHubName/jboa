@@ -11,7 +11,26 @@
 				<interceptor-ref name="myInterceptor"/>
 				<interceptor-ref name="defaultStack"/>
 			</interceptor-stack>
+
 		</interceptors>
+
+		<!--进入登录页面，加载struts的标签-->
+		<action name="doLogin">
+			<result>/login.jsp</result>
+		</action>
+
+		<!--登录操作-->
+		<action name="login" class="sysEmployeeAction" method="login">
+			<result name="success">/index.jsp</result>
+			<result name="login" type="redirectAction">doLogin</result>
+		</action>
+
+		<action name="random" class="createImageAction">
+			<result name="success" type="stream">
+				<param name="contentType">image/jpeg</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</action>
 
 
 
