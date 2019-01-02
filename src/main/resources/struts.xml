@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="myInterceptor" class="cn.jboa.filter.LoginInterceptor"/>
+
+			<!--非登录操作必须引用此拦截器栈-->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="myInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+
+
+
+
+
+	</package>
+
+</struts>    

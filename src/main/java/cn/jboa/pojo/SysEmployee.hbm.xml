@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.jboa.pojo.SysEmployee" table="sys_employee" schema="jboadb">
+        <id name="sn" column="sn"/>
+        <property name="name" column="name"/>
+        <property name="password" column="password"/>
+        <property name="status" column="status"/>
+        <many-to-one name="sysPositionByPositionId" class="cn.jboa.pojo.SysPosition">
+            <column name="position_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="sysDepartmentByDepartmentId" class="cn.jboa.pojo.SysDepartment">
+            <column name="department_id"/>
+        </many-to-one>
+        <set name="askLeaveNotesBySn" inverse="true">
+            <key>
+                <column name="next_deal_sn" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.jboa.pojo.AskLeaveNote"/>
+        </set>
+
+        <set name="bizClaimVouchersBySn" inverse="true">
+            <key>
+                <column name="next_deal_sn" not-null="true"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.jboa.pojo.BizClaimVoucher"/>
+        </set>
+
+    </class>
+</hibernate-mapping>

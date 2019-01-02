@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.jboa.pojo.AskLeaveNote" table="ask_leave_note" schema="jboadb">
+        <id name="id" column="id"/>
+        <property name="createTime" column="create_time"/>
+        <property name="modifyTime" column="modify_time"/>
+        <property name="status" column="status"/>
+        <many-to-one name="sysEmployeeByNextDealSn" class="cn.jboa.pojo.SysEmployee">
+            <column name="next_deal_sn" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="sysEmployeeByCreateSn" class="cn.jboa.pojo.SysEmployee">
+            <column name="create_sn"/>
+        </many-to-one>
+        <set name="askLeaveNoteDetailsById" inverse="true">
+            <key>
+                <column name="leava_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.jboa.pojo.AskLeaveNoteDetail"/>
+        </set>
+    </class>
+</hibernate-mapping>

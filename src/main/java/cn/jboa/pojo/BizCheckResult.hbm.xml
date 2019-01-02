@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.jboa.pojo.BizCheckResult" table="biz_check_result" schema="jboadb">
+        <id name="id" column="id"/>
+        <property name="checkTime" column="check_time"/>
+        <property name="checkerSn" column="checker_sn"/>
+        <property name="result" column="result"/>
+        <property name="comm" column="comm"/>
+        <many-to-one name="bizClaimVoucherByClaimId" class="cn.jboa.pojo.BizClaimVoucher">
+            <column name="claim_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

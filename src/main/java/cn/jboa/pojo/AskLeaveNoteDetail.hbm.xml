@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.jboa.pojo.AskLeaveNoteDetail" table="ask_leave_note_detail" schema="jboadb">
+        <id name="id" column="id"/>
+        <property name="startTime" column="start_time"/>
+        <property name="endTime" column="end_time"/>
+        <property name="day" column="day"/>
+        <property name="reason" column="reason"/>
+        <many-to-one name="askLeaveNoteByLeavaId" class="cn.jboa.pojo.AskLeaveNote">
+            <column name="leava_id"/>
+        </many-to-one>
+        <many-to-one name="leaveTypeByLeaveTypeId" class="cn.jboa.pojo.LeaveType">
+            <column name="leave_type_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>
