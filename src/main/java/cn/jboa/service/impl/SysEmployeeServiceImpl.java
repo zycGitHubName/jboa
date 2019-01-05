@@ -1,6 +1,7 @@
 package cn.jboa.service.impl;
 
 import cn.jboa.dao.SysEmployeeDao;
+import cn.jboa.pojo.SysDepartment;
 import cn.jboa.pojo.SysEmployee;
 import cn.jboa.service.SysEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,16 @@ public class SysEmployeeServiceImpl implements SysEmployeeService {
             }
             return null;
         }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public SysEmployee selectSysEmployeeByDept(SysDepartment dept) {
+        try {
+            return sysEmployeeDao.selectSysEmployeeByDept(dept);
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

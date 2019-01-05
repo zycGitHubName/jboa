@@ -1,6 +1,7 @@
 package cn.jboa.dao.impl;
 
 import cn.jboa.dao.SysEmployeeDao;
+import cn.jboa.pojo.SysDepartment;
 import cn.jboa.pojo.SysEmployee;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,12 @@ public class SysEmployeeDaoImpl extends HibernateDaoSupport implements SysEmploy
     @Override
     public SysEmployee selectSysEmployeeBySn(String sn) {
         return (SysEmployee) this.getHibernateTemplate().find("from SysEmployee where sn = ?",sn).get(0);
+    }
+
+    @Override
+    public SysEmployee selectSysEmployeeByDept(SysDepartment dept) {
+        return (SysEmployee) this.getHibernateTemplate()
+                .find("from SysEmployee se " +
+                        "where se.sysDepartmentByDepartmentId = ? and se.sysPositionByPositionId.nameCn = ?",dept,"部门经理").get(0);
     }
 }

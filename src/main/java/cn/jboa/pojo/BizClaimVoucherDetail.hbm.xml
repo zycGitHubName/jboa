@@ -5,7 +5,8 @@
 <hibernate-mapping>
 
     <class name="cn.jboa.pojo.BizClaimVoucherDetail" table="biz_claim_voucher_detail" schema="jboadb">
-        <id name="id" column="id"/>
+        <id name="id" type="int"/>
+
         <property name="item" column="item"/>
         <property name="account" column="account"/>
         <property name="des" column="des"/>

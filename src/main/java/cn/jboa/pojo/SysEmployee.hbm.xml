@@ -9,20 +9,20 @@
         <property name="name" column="name"/>
         <property name="password" column="password"/>
         <property name="status" column="status"/>
-        <many-to-one name="sysPositionByPositionId" class="cn.jboa.pojo.SysPosition">
+        <many-to-one name="sysPositionByPositionId" class="cn.jboa.pojo.SysPosition" lazy="false">
             <column name="position_id" not-null="true"/>
         </many-to-one>
-        <many-to-one name="sysDepartmentByDepartmentId" class="cn.jboa.pojo.SysDepartment">
+        <many-to-one name="sysDepartmentByDepartmentId" class="cn.jboa.pojo.SysDepartment" lazy="false">
             <column name="department_id"/>
         </many-to-one>
-        <set name="askLeaveNotesBySn" inverse="true">
+        <set name="askLeaveNotesBySn" inverse="true" lazy="false">
             <key>
                 <column name="next_deal_sn" not-null="true"/>
             </key>
             <one-to-many not-found="ignore" class="cn.jboa.pojo.AskLeaveNote"/>
         </set>
 
-        <set name="bizClaimVouchersBySn" inverse="true">
+        <set name="bizClaimVouchersBySn" inverse="true" lazy="false">
             <key>
                 <column name="next_deal_sn" not-null="true"/>
             </key>
