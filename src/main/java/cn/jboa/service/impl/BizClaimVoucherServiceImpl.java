@@ -23,9 +23,9 @@ public class BizClaimVoucherServiceImpl implements BizClaimVoucherService {
     private BizClaimVoucherDao bizClaimVoucherDao;
 
     @Override
-    public List<BizClaimVoucher> selectBizClaimVoucherByPageAndConditions(PageSupport<BizClaimVoucher> pageSupport, String createSn, String status, Timestamp startDate, Timestamp endDate) {
+    public List<BizClaimVoucher> selectBizClaimVoucherByPageAndConditions(PageSupport<BizClaimVoucher> pageSupport,String position, String name, String status, Timestamp startDate, Timestamp endDate) {
         try {
-            List<BizClaimVoucher> claimVoucherList = bizClaimVoucherDao.selectBizClaimVoucherByPageAndConditions(pageSupport,createSn,status,startDate);
+            List<BizClaimVoucher> claimVoucherList = bizClaimVoucherDao.selectBizClaimVoucherByPageAndConditions(pageSupport,position,name,status,startDate);
             if (endDate != null){
                 for (int i = 0; i < claimVoucherList.size(); i++) {
                     Iterator<BizCheckResult> iterator = claimVoucherList.get(i).getBizCheckResultsById().iterator();
@@ -45,9 +45,9 @@ public class BizClaimVoucherServiceImpl implements BizClaimVoucherService {
     }
 
     @Override
-    public int selectBizClaimVoucherCountByConditions(String createSn, String status, Timestamp startDate,Timestamp endDate) {
+    public int selectBizClaimVoucherCountByConditions(String position, String name, String status, Timestamp startDate,Timestamp endDate) {
         try {
-            int totalCount = bizClaimVoucherDao.selectBizClaimVoucherCountByConditions(createSn,status,startDate,endDate);
+            int totalCount = bizClaimVoucherDao.selectBizClaimVoucherCountByConditions(position,name,status,startDate,endDate);
             return totalCount;
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,6 +61,16 @@ public class BizClaimVoucherServiceImpl implements BizClaimVoucherService {
             bizClaimVoucherDao.insertBizClaimVoucher(claimVoucher);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public BizClaimVoucher selectBizClaimVoucherById(int id) {
+        try {
+            return bizClaimVoucherDao.selectBizClaimVoucherById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

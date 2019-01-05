@@ -73,7 +73,7 @@
 		        <a href="claimVoucher_getClaimVoucherById.action?claimVoucher.id=<s:property value="#claimVoucher.id"/>">
 		        	<img src="${images}/search.gif" width="16" height="15" />
 		        </a>
-		        <s:if test="#claimVoucher.nextDeal.name == #session.employee.name">
+		        <s:if test="#claimVoucher.sysEmployeeByNextDealSn.name == #session.current_emp.name">
 		        	<s:if test="#claimVoucher.status == '已提交' || #claimVoucher.status == '侍审批' || #claimVoucher.status == '已审批'">
 				        <a href="claimVoucher_toCheck.action?claimVoucher.id=<s:property value="#claimVoucher.id"/>">
 				         <img src="${images}/sub.gif" width="16" height="16" />

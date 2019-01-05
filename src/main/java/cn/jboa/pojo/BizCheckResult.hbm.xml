@@ -7,9 +7,11 @@
     <class name="cn.jboa.pojo.BizCheckResult" table="biz_check_result" schema="jboadb">
         <id name="id" column="id"/>
         <property name="checkTime" column="check_time"/>
-        <property name="checkerSn" column="checker_sn"/>
         <property name="result" column="result"/>
         <property name="comm" column="comm"/>
+        <many-to-one name="checkEmployee" class="cn.jboa.pojo.SysEmployee">
+            <column name="checker_sn"/>
+        </many-to-one>
         <many-to-one name="bizClaimVoucherByClaimId" class="cn.jboa.pojo.BizClaimVoucher">
             <column name="claim_id"/>
         </many-to-one>

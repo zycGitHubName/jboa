@@ -22,13 +22,13 @@
 				$("#notice").text("*");
 				for(var s=0;s<$("#rowNumber").val();s++){
 					$("#account"+s).next(".notice").text("*");
-					$("#desc"+s).next(".notice").text("*");
+					$("#des"+s).next(".notice").text("*");
 					if(isEmpty($("#account"+s).val())){
 						$("#account"+s).next(".notice").text("* 金额不能为空  ！");
 						return false;
 					}		
-					if(isEmpty($("#desc"+s).val())){
-						$("#desc"+s).next(".notice").text("* 金额不能为空  ！");
+					if(isEmpty($("#des"+s).val())){
+						$("#des"+s).next(".notice").text("* 金额不能为空  ！");
 						return false;
 					}		
 								
@@ -43,10 +43,10 @@
 				var item = $("#item").val();
 				var account = $("#account").val();
 				totalAccount=parseFloat(totalAccount)+parseFloat(account);
-				var desc = $("#desc").val();
+				var des = $("#des").val();
 				tr.find("td").get(0).innerHTML="<input  name=detailList["+j+"].item id=item"+j+" type=hidden value="+item+" />"+item;
 				tr.find("td").get(1).innerHTML="<input  name=detailList["+j+"].account id=account"+j+"  type=hidden value="+account+" />"+account;
-				tr.find("td").get(2).innerHTML="<input  name=detailList["+j+"].desc  id=desc"+j+" type=hidden value="+desc+" />"+desc;		
+				tr.find("td").get(2).innerHTML="<input  name=detailList["+j+"].des  id=des"+j+" type=hidden value="+des+" />"+des;
 				tr.find("td").get(3).innerHTML="<input type=button name=DelRow"+j+" id=DelRow"+j+" onclick=delRow("+j+") value="+'删除'+" />";
 				tr.find("td").get(3).innerHTML="<img src=${images}/delete.gif width=16 height=16 id=DelRow"+j+" onclick=delRow("+j+") />";
 				tr.show();
@@ -54,7 +54,7 @@
 				//传递一共添加多少问题 
 				rowNumber=i;
 				$("#account").attr("value","");
-				$("#desc").attr("value","");
+				$("#des").attr("value","");
 				$("#totalAccount").attr("value",totalAccount);
 		
 			});	
@@ -72,8 +72,8 @@
 				$("#item"+s).attr("id","item"+(s-1));
 				$("#account"+s).attr("name","detailList["+(s-1)+"].account");
 				$("#account"+s).attr("id","account"+(s-1));
-				$("#desc"+s).attr("name","detailList["+(s-1)+"].des");
-				$("#desc"+s).attr("id","desc"+(s-1));		
+				$("#des"+s).attr("name","detailList["+(s-1)+"].des");
+				$("#des"+s).attr("id","des"+(s-1));
 				var js="delRow("+(s-1)+");";
 				var newclick=eval("(false||function (){"+js+"});");
 				$("#DelRow"+s).unbind('click').removeAttr('onclick').click(newclick);
@@ -146,7 +146,7 @@
 							</select>
 						</td>
 						<td width="30%"><input type="text" name="claimVoucherDetail.account" id="account" /><span class=notice>*</span></td>
-						<td width="30%"><input type="text" name="claimVoucherDetail.des" id="desc" /><span class=notice>*</span></td>
+						<td width="30%"><input type="text" name="claimVoucherDetail.des" id="des" /><span class=notice>*</span></td>
 						<td width="10%"><img src="${images}/add.gif" width="16" height="16" id="AddRow"/></td>
 					</tr>
 				</table>

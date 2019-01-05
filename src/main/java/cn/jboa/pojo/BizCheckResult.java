@@ -9,7 +9,7 @@ import java.util.Objects;
 public class BizCheckResult {
     private int id;
     private Timestamp checkTime;
-    private String checkerSn;
+    private SysEmployee checkEmployee;
     private String result;
     private String comm;
     private BizClaimVoucher bizClaimVoucherByClaimId;
@@ -30,12 +30,12 @@ public class BizCheckResult {
         this.checkTime = checkTime;
     }
 
-    public String getCheckerSn() {
-        return checkerSn;
+    public SysEmployee getCheckEmployee() {
+        return checkEmployee;
     }
 
-    public void setCheckerSn(String checkerSn) {
-        this.checkerSn = checkerSn;
+    public void setCheckEmployee(SysEmployee checkEmployee) {
+        this.checkEmployee = checkEmployee;
     }
 
     public String getResult() {
@@ -61,14 +61,14 @@ public class BizCheckResult {
         BizCheckResult that = (BizCheckResult) o;
         return id == that.id &&
                 Objects.equals(checkTime, that.checkTime) &&
-                Objects.equals(checkerSn, that.checkerSn) &&
+                Objects.equals(checkEmployee, that.checkEmployee) &&
                 Objects.equals(result, that.result) &&
                 Objects.equals(comm, that.comm);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, checkTime, checkerSn, result, comm);
+        return Objects.hash(id, checkTime, checkEmployee, result, comm);
     }
 
     public BizClaimVoucher getBizClaimVoucherByClaimId() {
