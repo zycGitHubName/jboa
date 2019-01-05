@@ -95,14 +95,14 @@ public class BizClaimVoucherAction extends ActionSupport {
             }else{
                 claimVoucher.setSysEmployeeByCreateSn(currEmp);
             }
-            int totalCount = bizClaimVoucherService.selectBizClaimVoucherCountByConditions(currEmp.getName(),claimVoucher.getStatus(),startDate,endDate);
+            int totalCount = bizClaimVoucherService.selectBizClaimVoucherCountByConditions(currEmp.getStatus(),currEmp.getName(),claimVoucher.getStatus(),startDate,endDate);
 
             if (pageSupport == null) pageSupport = new PageSupport<BizClaimVoucher>();
             pageSupport.setTotalCount(totalCount);
             pageSupport.setCurrPageNo(pageNo);
             pageSupport.setPageSize(pageSize);
             pageSupport.setTotalPageCount(pageSupport.getTotalPageCount());
-            pageSupport.setItems(bizClaimVoucherService.selectBizClaimVoucherByPageAndConditions(pageSupport,currEmp.getName(),claimVoucher.getStatus(),startDate,endDate));
+            pageSupport.setItems(bizClaimVoucherService.selectBizClaimVoucherByPageAndConditions(pageSupport,currEmp.getStatus(),currEmp.getName(),claimVoucher.getStatus(),startDate,endDate));
             return SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
@@ -129,6 +129,18 @@ public class BizClaimVoucherAction extends ActionSupport {
             e.printStackTrace();
             return INPUT;
         }
+    }
+
+    /**
+     * 查看报销单详细信息的
+     * @return
+     */
+    public String getClaimVoucherById(){
+        claimVoucher = bizClaimVoucherService.selectBizClaimVoucherById(claimVoucher.getId());
+        if (claimVoucher == null){
+            return ERROR;
+        }
+        return SUCCESS;
     }
 
     public BizClaimVoucher getClaimVoucher() {

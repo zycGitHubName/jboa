@@ -18,15 +18,15 @@
                   <caption>基本信息</caption>
                   <tr>
                   	<td >编&nbsp;&nbsp;号：<s:property value="claimVoucher.id"/></td>
-                    <td>填&nbsp;写&nbsp;人：<s:property value="claimVoucher.creator.name"/></td>
-                    <td>部&nbsp;&nbsp;门：<s:property value="claimVoucher.creator.sysDepartment.name"/></td>
-                    <td>职&nbsp;&nbsp;&nbsp;&nbsp;位：<s:property value="claimVoucher.creator.sysPosition.nameCn"/></td>
+                    <td>填&nbsp;写&nbsp;人：<s:property value="claimVoucher.sysEmployeeByCreateSn.name"/></td>
+                    <td>部&nbsp;&nbsp;门：<s:property value="claimVoucher.sysEmployeeByCreateSn.sysDepartmentByDepartmentId.name"/></td>
+                    <td>职&nbsp;&nbsp;&nbsp;&nbsp;位：<s:property value="claimVoucher.sysEmployeeByCreateSn.sysPositionByPositionId.nameCn"/></td>
                   </tr>
                   <tr>
                     <td>总金额：<s:property value="claimVoucher.totalAccount"/></td>
                     <td>填报时间：<s:date name="claimVoucher.createTime" format="yyyy-MM-dd hh:mm:ss"/></td>
                     <td>状态：<s:property value="claimVoucher.status"/></td>
-                    <td>待处理人：<s:property value="claimVoucher.nextDeal.name"/></td>
+                    <td>待处理人：<s:property value="claimVoucher.sysEmployeeByNextDealSn.name"/></td>
                   </tr>
                   <tr>
                   	<td colspan="4"><p>-------------------------------------------------------------------------------</p></td>
@@ -39,11 +39,11 @@
                     <td>项目金额</td>
                     <td>费用说明</td>
                   </tr>
-                <s:iterator value="claimVoucher.detailList" id="claimDetail" begin="0" status="s">
+                <s:iterator value="claimVoucher.bizClaimVoucherDetailsById" id="claimDetail" begin="0" status="s">
 				<tr>
 					<td><s:property value="#claimDetail.item"/></td>
 					<td>￥<s:property value="#claimDetail.account"/></td>
-					<td><s:property value="#claimDetail.desc"/></td>
+					<td><s:property value="#claimDetail.des"/></td>
 				</tr>
 				</s:iterator>
       </table>
@@ -51,7 +51,7 @@
       <p>-------------------------------------------------------------------------------</p>
       
       <table width="90%" border="0" cellspacing="0" cellpadding="0" class="addform-base">
-      	<s:iterator value="claimVoucher.checkResultList" id="checkResult" begin="0" status="s">
+      	<s:iterator value="claimVoucher.bizCheckResultsById" id="checkResult" begin="0" status="s">
          <tr>
            <td width="27%"><s:property value="#checkResult.checkEmployee.name" />(<s:property value="#checkResult.checkEmployee.sysPosition.nameCn" />)</td>
            <td width="20%"><s:date name="#checkResult.checkTime" format="yyyy-MM-dd hh:mm:ss"/></td>

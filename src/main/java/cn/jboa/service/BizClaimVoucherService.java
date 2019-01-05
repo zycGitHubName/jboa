@@ -24,25 +24,32 @@ public interface BizClaimVoucherService {
      * @param status 报销单状态
      * @param startDate 创建时间
      * @param endDate 结束时间
-     * @param createSn 填报人
+     * @param name 填报人或审批人
      * @return
      */
     public List<BizClaimVoucher> selectBizClaimVoucherByPageAndConditions(
-            PageSupport<BizClaimVoucher> pageSupport,String createSn, String status, Timestamp startDate, Timestamp endDate);
+            PageSupport<BizClaimVoucher> pageSupport,String positin,String name, String status, Timestamp startDate, Timestamp endDate);
 
     /**
      * 根据条件查询报销单总数量
      * @param status 报销单状态
      * @param startDate 创建时间
      * @param endDate 结束时间
-     * @param createSn 填报人
+     * @param name 填报人或审批人
      * @return
      */
-    public int selectBizClaimVoucherCountByConditions(String createSn, String status, Timestamp startDate, Timestamp endDate);
+    public int selectBizClaimVoucherCountByConditions(String positin,String name, String status, Timestamp startDate, Timestamp endDate);
 
     /**
      * 保存报销单
      * @param claimVoucher
      */
     public void insertBizClaimVoucher(BizClaimVoucher claimVoucher);
+
+    /**
+     * 根据报销单id查询报销单详细详细
+     * @param id 报销单id
+     * @return 报销单
+     */
+    public BizClaimVoucher selectBizClaimVoucherById(int id);
 }

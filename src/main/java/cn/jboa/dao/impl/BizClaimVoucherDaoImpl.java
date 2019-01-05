@@ -34,29 +34,38 @@ public class BizClaimVoucherDaoImpl extends HibernateDaoSupport implements BizCl
 
 
     @Override
-    public List<BizClaimVoucher> selectBizClaimVoucherByPageAndConditions(PageSupport<BizClaimVoucher> pageSupport,String createSn, String status, Timestamp startDate) {
+    public List<BizClaimVoucher> selectBizClaimVoucherByPageAndConditions(final PageSupport<BizClaimVoucher> pageSupport,final String position,final String name, final String status, final Timestamp startDate) {
         return this.getHibernateTemplate().executeFind(new HibernateCallback(){
             @Override
             public List<BizClaimVoucher> doInHibernate(Session session) throws HibernateException, SQLException {
-                StringBuffer hql = new StringBuffer("from BizClaimVoucher bcv where 1 = 1 and bcv.sysEmployeeByCreateSn.name = :createSn" );
-                if(status != null && !"-1".equals(status)){
-                    hql.append(" and bcv.status = :status");
+                StringBuffer hql = new StringBuffer("from BizClaimVoucher bcv where 1 = 1" );
+                if ("员工".equals(position)){
+                    hql.append(" and bcv.sysEmployeeByCreateSn.name = :name");
+                    if(status != null && !"".equals(status)){
+                        hql.append(" and bcv.status = :status");
+                    }
+                }else{
+                    hql.append(" and bcv.sysEmployeeByNextDealSn.name = :name");
+                    if ("部门经理".equals(position)){
+                        hql.append(" and bcv.status = '已提交'");
+                    }else if("总经理".equals(position)){
+                        hql.append(" and bcv.status = '待审批'");
+                    }else if("财务".equals(position)){
+                        hql.append(" and bcv.status = '已审批'");
+                    }
                 }
                 if(startDate != null){
                     hql.append(" and bcv.createTime > :startDate ");
                 }
 
                 Query query = session.createQuery(hql.toString());
-                query.setParameter("createSn",createSn);
-                if(status != null  && !"-1".equals(status)){
+                query.setParameter("name",name);
+                if(status != null  && !"-1".equals(status) && "员工".equals(position)){
                     query.setParameter("status",status);
                 }
                 if(startDate != null){
                     query.setParameter("startDate",startDate);
                 }
-
-
-
                 return query
                         .setFirstResult((pageSupport.getCurrPageNo()-1)*pageSupport.getPageSize())
                         .setMaxResults(pageSupport.getPageSize()).list();
@@ -65,22 +74,35 @@ public class BizClaimVoucherDaoImpl extends HibernateDaoSupport implements BizCl
     }
 
     @Override
-    public int selectBizClaimVoucherCountByConditions(String createSn,String status, Timestamp startDate,Timestamp endDate) {
+    public int selectBizClaimVoucherCountByConditions(String position,String name,String status, Timestamp startDate,Timestamp endDate) {
         List<String> paramNames = new ArrayList<String>();
         List<Object> values = new ArrayList<Object>();
         StringBuffer hql = new StringBuffer("select count(bcv.id) from BizClaimVoucher bcv" );
         if (endDate != null){
-            hql.append(",BizCheckResult bcr where bcr.bizClaimVoucherByClaimId.id = bcv.id and bcv.sysEmployeeByCreateSn.name = :createSn");
+            hql.append(",BizCheckResult bcr where bcr.bizClaimVoucherByClaimId.id = bcv.id");
         }else{
-            hql.append(" where 1 = 1 and bcv.sysEmployeeByCreateSn.name = :createSn");
+            hql.append(" where 1 = 1 ");
         }
-        paramNames.add("createSn");
-        values.add(createSn);
-        if(status != null && !"".equals(status)){
-            hql.append(" and bcv.status = :status");
-            paramNames.add("status");
-            values.add(status);
+
+        if ("员工".equals(position)){
+            hql.append(" and bcv.sysEmployeeByCreateSn.name = :name");
+            if(status != null && !"".equals(status)){
+                hql.append(" and bcv.status = :status");
+                paramNames.add("status");
+                values.add(status);
+            }
+        }else{
+            hql.append(" and bcv.sysEmployeeByNextDealSn.name = :name");
+            if ("部门经理".equals(position)){
+                hql.append(" and bcv.status = '已提交'");
+            }else if("总经理".equals(position)){
+                hql.append(" and bcv.status = '待审批'");
+            }else if("财务".equals(position)){
+                hql.append(" and bcv.status = '已审批'");
+            }
         }
+        paramNames.add("name");
+        values.add(name);
         if(startDate != null){
             hql.append(" and bcv.createTime > :createTime ");
             paramNames.add("createTime");
@@ -109,6 +131,11 @@ public class BizClaimVoucherDaoImpl extends HibernateDaoSupport implements BizCl
 
     @Override
     public void insertBizClaimVoucher(BizClaimVoucher claimVoucher) {
-        this.getHibernateTemplate().save(claimVoucher);
+        this.getHibernateTemplate().saveOrUpdate(claimVoucher);
+    }
+
+    @Override
+    public BizClaimVoucher selectBizClaimVoucherById(int id) {
+        return this.getHibernateTemplate().get(BizClaimVoucher.class,id);
     }
 }

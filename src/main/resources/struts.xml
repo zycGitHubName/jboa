@@ -55,10 +55,16 @@
 			<result>/jsp/claim/claim_voucher_edit.jsp</result>
 		</action>
 
-		<!--添加保险岛，成功：跳转到查询保险单，失败：跳转后添加页面-->
+		<!--添加报销单，成功：跳转到查询保险单，失败：跳转后添加页面-->
 		<action name="claimVoucher_saveClaimVoucher" class="bizClaimVoucherAction" method="saveClaimVoucher">
 			<result name="success" type="redirectAction">claimVoucher_searchClaimVoucher.action</result>
-			<result name="input" type="redirect">/jsp/claim/claim_voucher_edit.jsp</result>
+			<result name="input">/jsp/claim/claim_voucher_edit.jsp</result>
+		</action>
+
+		<!--查看报销单详细信息-->
+		<action name="claimVoucher_getClaimVoucherById" class="bizClaimVoucherAction" method="getClaimVoucherById">
+			<result name="success">/jsp/claim/claim_voucher_view.jsp</result>
+			<result name="error" type="redirectAction">claimVoucher_searchClaimVoucher.action</result>
 		</action>
 
 	</package>
