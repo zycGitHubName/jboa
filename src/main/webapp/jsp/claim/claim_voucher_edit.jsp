@@ -1,4 +1,4 @@
-﻿<%@ page language="java" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ include file="../common/taglib.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -72,7 +72,7 @@
 				$("#item"+s).attr("id","item"+(s-1));
 				$("#account"+s).attr("name","detailList["+(s-1)+"].account");
 				$("#account"+s).attr("id","account"+(s-1));
-				$("#desc"+s).attr("name","detailList["+(s-1)+"].desc");
+				$("#desc"+s).attr("name","detailList["+(s-1)+"].des");
 				$("#desc"+s).attr("id","desc"+(s-1));		
 				var js="delRow("+(s-1)+");";
 				var newclick=eval("(false||function (){"+js+"});");
@@ -108,7 +108,7 @@
 				<table width="90%" border="0" cellspacing="0" cellpadding="0" class="addform-base">
 					<tr>
 						<td>*填报人：</td>
-						<td><s:property value="#session.employee.name"/></td>
+						<td><s:property value="#session.current_emp.name"/></td>
 						<td>*填报时间：</td>
 						<td>2013-8-17 8：30</td>
 					</tr>
@@ -146,7 +146,7 @@
 							</select>
 						</td>
 						<td width="30%"><input type="text" name="claimVoucherDetail.account" id="account" /><span class=notice>*</span></td>
-						<td width="30%"><input type="text" name="claimVoucherDetail.desc" id="desc" /><span class=notice>*</span></td>
+						<td width="30%"><input type="text" name="claimVoucherDetail.des" id="desc" /><span class=notice>*</span></td>
 						<td width="10%"><img src="${images}/add.gif" width="16" height="16" id="AddRow"/></td>
 					</tr>
 				</table>

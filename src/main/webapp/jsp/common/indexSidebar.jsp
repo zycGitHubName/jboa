@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false" %>
 <%@ include file="taglib.jsp"%>
 <div class="nav" id="nav">
 	<div class="t"></div>

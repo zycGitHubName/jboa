@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ include file="../common/taglib.jsp"%>
 <link href="<%=request.getContextPath() %>/css/style.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
@@ -29,8 +29,8 @@
 		<div class="forms">
 			 <s:form action="claimVoucher_searchClaimVoucher.action" name="queryForm">
 	       		<label>报销单状态</label>
-	  			<s:select name="claimVoucher.status" list="statusMap" 
-	  			listKey="key" listValue="value" headerKey="" headerValue="全部" theme="simple"></s:select>
+	  			<s:select name="claimVoucher.status" list="statusMap"
+	  			listKey="key" listValue="value" headerKey="-1" headerValue="全部" theme="simple" ></s:select>
 		       <label for="time">开始时间</label>
 		       <s:textfield name="startDate" id="startDate" cssClass="nwinput"></s:textfield>
 		       <label for="end-time">结束时间</label>
@@ -56,10 +56,10 @@
 	      <tr>
 	        <td><a href="claimVoucher_getClaimVoucherById.action?claimVoucher.id=<s:property value="#claimVoucher.id"/>"><s:property value="#claimVoucher.id"/></a></td>
 	        <td><s:date name="#claimVoucher.createTime"/></td>
-	        <td><s:property value="#claimVoucher.creator.name"/></td>
+	        <td><s:property value="#claimVoucher.sysEmployeeByCreateSn.name"/></td>
 	        <td><s:property value="#claimVoucher.totalAccount"/></td>
 	        <td><s:property value="#claimVoucher.status"/></td>
-	        <td><s:property value="#claimVoucher.nextDeal.name"/></td>
+	        <td><s:property value="#claimVoucher.sysEmployeeByNextDealSn.name"/></td>
 	        <td>
 	        	<s:if test="#claimVoucher.status == '新创建' || #claimVoucher.status == '已打回'">
 	        		<a href="claimVoucher_toUpdate.action?claimVoucher.id=<s:property value="#claimVoucher.id"/>">

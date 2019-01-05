@@ -1,5 +1,6 @@
 package cn.jboa.dao;
 
+import cn.jboa.pojo.SysDepartment;
 import cn.jboa.pojo.SysEmployee;
 
 /**
@@ -13,5 +14,12 @@ public interface SysEmployeeDao {
      * @return
      */
     public SysEmployee selectSysEmployeeBySn(String sn);
+
+    /**
+     * 根据部门查询部门经理
+     * @param dept
+     * @return
+     */
+    public SysEmployee selectSysEmployeeByDept(SysDepartment dept);
 
 }

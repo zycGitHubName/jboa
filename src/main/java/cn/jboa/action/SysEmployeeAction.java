@@ -54,6 +54,8 @@ public class SysEmployeeAction extends ActionSupport {
         return LOGIN;
     }
 
+
+
     public SysEmployee getEmployee() {
         return employee;
     }

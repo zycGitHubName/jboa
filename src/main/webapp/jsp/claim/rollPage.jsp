@@ -1,8 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ include file="../common/taglib.jsp"%>
 <div class="page-bar">
 	<c:if test="${param.currentPageNo>1}">
-		<a href="javascript:page_nav(${param.formName},1);">首页</a>  
+		<a href="javascript:page_nav(${param.formName},1);">首页</a>
 		<a href="javascript:page_nav(${param.formName},<c:out value="${param.currentPageNo-1}"/>);">上一页</a>
 	</c:if>
 	<c:if test="${currentPageNo<=1}">
